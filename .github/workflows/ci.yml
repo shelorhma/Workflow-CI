@@ -30,7 +30,7 @@ jobs:
       - name: Run MLflow Project
         shell: bash -l {0}
         run: |
-          mlflow run MLProject
+          mlflow run MLProject --experiment-name "CI Bank Marketing"
 
       - name: Upload MLflow artifacts
         uses: actions/upload-artifact@v4
