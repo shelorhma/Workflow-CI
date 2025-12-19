@@ -44,10 +44,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker Image with MLflow
+      - name: Build Docker Image from MLflow Model
         shell: bash -l {0}
         run: |
-          mlflow projects build-docker MLProject -n ${{ secrets.DOCKER_USERNAME }}/bank-marketing-mlflow
+         mlflow models build-docker \
+            -m "runs:/*/model" \
+            -n ${{ secrets.DOCKER_USERNAME }}/bank-marketing-mlflow
 
       - name: Push Docker Image
         run: |
