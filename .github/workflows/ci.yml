@@ -47,7 +47,7 @@ jobs:
       - name: Build Docker Image with MLflow
         shell: bash -l {0}
         run: |
-          mlflow build-docker MLProject -n ${{ secrets.DOCKER_USERNAME }}/bank-marketing-mlflow
+          mlflow projects build-docker MLProject -n ${{ secrets.DOCKER_USERNAME }}/bank-marketing-mlflow
 
       - name: Push Docker Image
         run: |
