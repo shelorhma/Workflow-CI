@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repository
+      # Checkout source code
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -53,9 +53,11 @@ jobs:
       - name: Build Docker Image
         shell: bash -l {0}
         run: |
-          RUN_ID=$(ls mlruns/0 | head -n 1)
+          MODEL_PATH=$(find mlruns -type d -name model | head -n 1)
+          echo "Using model path: $MODEL_PATH"
+
           mlflow models build-docker \
-            -m "mlruns/0/$RUN_ID/artifacts/model" \
+            -m "$MODEL_PATH" \
             -n ${{ secrets.DOCKER_USERNAME }}/bank-marketing-mlflow
 
       # Push Docker image
